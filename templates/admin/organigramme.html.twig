@@ -1,0 +1,73 @@
+{% extends 'admin/adminBase.html.twig' %}
+{% block stylesheets %}
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/organigramme.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800" style="text-align: center">organizational chart</h1>
+        <br>
+        <br>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary" style="text-align: center">organizational chart</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Last Name</th>
+                            <th>First Name</th>
+                            <th>Adresse</th>
+                            <th>Phone number</th>
+                            <th>Salary</th>
+                            <th>Office</th>
+                            <th>subordinates</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for employee in employes %}
+                            <tr>
+                                <td>{{ employee.nom }}</td>
+                                <td>{{ employee.prenom }}</td>
+                                <td>{{ employee.adresse }}</td>
+                                <td>{{ employee.tel }}</td>
+                                <td>{{ employee.salaire }}</td>
+                                <td>
+                                    {{ employee.office }}
+                                </td>
+                                <td>
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                        <th>nom</th>
+                                        <th>prenom</th>
+                                        <th>email</th>
+                                        <th>office</th>
+                                        </thead>
+                                    {% for subordinate in employee.subordinantes %}
+                                        <tr>
+                                        <td>{{ subordinate.nom }}</td>
+                                        <td>{{ subordinate.prenom }}</td>
+                                        <td>{{ subordinate.email }}</td>
+                                        <td>{{ subordinate.office }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </table>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

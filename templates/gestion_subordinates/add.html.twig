@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+{% endblock %}
+{% block stylesheets %}
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+    <div style="margin-left: 30px; margin-right: 30px">
+{{ form(form) }}
+    </div>
+{% endblock %}
+{% block javascripts %}
+{% endblock %}
+

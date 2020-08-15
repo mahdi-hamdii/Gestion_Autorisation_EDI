@@ -1,0 +1,53 @@
+{% extends 'admin/adminBase.html.twig' %}
+{% block stylesheets %}
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800" style="text-align: center">All requests</h1>
+        <br>
+        <br>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary" style="text-align: center">All requests</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="table-layout: fixed">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Motive</th>
+                            <th>Description</th>
+                            <th>Beginning Date</th>
+                            <th>Beginning Date</th>
+                            <th>Formulation Date</th>
+                            <th>State</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for demande in demandes %}
+                               <tr>
+                                <td>{{ demande.type }}</td>
+                                <td>{{ demande.motifs }}</td>
+                                <td>{{ demande.description }}</td>
+                                <td>{{ (demande.dateDebut|date("d/m/y")) }}</td>
+                                <td>{{ demande.dateFin|date("d/m/y")}}</td>
+                                <td>{{ demande.dateDeFormulation|date("d/m/y")}}</td>
+                                <td>{{ demande.Etat }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

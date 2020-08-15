@@ -1,0 +1,74 @@
+{% extends 'admin/adminBase.html.twig' %}
+{% block title %}Subordinates!{% endblock %}
+{% block stylesheets %}
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800" style="text-align: center">Subordinates</h1>
+        <br>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="location.href='{{ asset('admin/add/employes') }}'">Add Employee </button>
+        <br>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary" style="text-align: center">Subordinates</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Last Name</th>
+                            <th>First Name</th>
+                            <th>Adresse</th>
+                            <th>Phone number</th>
+                            <th>Salary</th>
+                            <th>Office</th>
+                            <th>Edit</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for employe in employes %}
+                            <tr>
+                                <td>{{ employe.nom }}</td>
+                                <td>{{ employe.prenom }}</td>
+                                <td>{{ employe.adresse }}</td>
+                                <td>{{ employe.tel }}</td>
+                                <td>{{ employe.salaire }}</td>
+                                <td>
+                                    {{ employe.office }}
+                                </td>
+                                <td>
+                                    <a href="{{ path('admin_gestion_employes', {'id': employe.id } ) }}">
+                                        <i class="fas fa-fw fa-cog"></i
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+{% endblock %}

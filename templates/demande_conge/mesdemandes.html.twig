@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+{% block title %}My requests{% endblock %}
+{% block stylesheets %}
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800" style="text-align: center">My Requests</h1>
+        <br>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="location.href='{{ asset('/demande/conge') }}'">Add a request</button>
+        <br>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary" style="text-align: center">My requests</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="table-layout: fixed">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Motive</th>
+                            <th>Description</th>
+                            <th>Beginning Date</th>
+                            <th>Ending Date</th>
+                            <th>Formulation Date</th>
+                            <th>State</th>
+                            <th>Edit</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for demande in demandes %}
+                            <tr>
+                                <td>{{ demande.type }}</td>
+                                <td>{{ demande.motifs }}</td>
+                                <td>{{ demande.description }}</td>
+                                <td>{{ (demande.dateDebut|date("d/m/y")) }}</td>
+                                <td>{{ demande.dateFin|date("d/m/y")}}</td>
+                                <td>{{ demande.dateDeFormulation|date("d/m/y")}}</td>
+                                <td>{{ demande.Etat }}</td>
+                                <td>
+                                    {% if demande.Etat== "en cours" %}
+                                    <a href="{{ path('demande_conge_edit', {'id': demande.id } ) }}">
+                                        <i class="fas fa-fw fa-cog"></i>
+                                    </a>
+                                    {% else %}
+                                        <i class="fas fa-minus-circle"></i>
+                                        {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+{% endblock %}
+{% block nom %}
+    {{ employe.nom}}
+    {{ employe.prenom }}
+{% endblock %}
+{% block javascripts %}
+{% endblock %}
